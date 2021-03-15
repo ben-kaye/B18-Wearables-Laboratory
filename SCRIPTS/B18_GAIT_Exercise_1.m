@@ -18,7 +18,7 @@ close all
 %your directory where the data is stored by denoting the pathname variable:
 %e.g.: data_pathname='C:\MATLAB\B18 Lab\DATA\B18_GAIT_data\'
 b18lab_pathname=pwd;
-data_pathname=[b18lab_pathname, filesep, 'DATA\B18_GAIT_data'];
+data_pathname='C:\Users\benka\OneDrive - Nexus365\B-course Content\B18 Biological Modelling\Wearables Lab\B18-Wearables-Laboratory\DATA\B18_GAIT_data\';
 
 %set the device location; in this example we are only interested in
 %smartphone accelerometry that recorded when the phone was in the front
@@ -46,9 +46,9 @@ options.plot_data=1;
 %      (default, options.ssd_threshold=0.77; g, where gravity g=9.81 ms^-2)
 %-------------------------------------------------------------------------%
 G=9.81; %gravity 9.81 m/s^2
-options.acc_threshold;  %choose value
-options.ssd_threshold;  %choose value
-options.time_threshold=5; %[s]
+options.acc_threshold = 0.1*G;  %choose value
+options.ssd_threshold = 0.23*G;  %choose value
+options.time_threshold = 5; %[s]
 %% Step Detection Parameters:
 %-------------------------------------------------------------------------%
 % - 'MinPeakDistance': the minimum distance between each detected peak 
@@ -56,12 +56,12 @@ options.time_threshold=5; %[s]
 % - 'MinPeakHeight': the minimum height of a detected detected peak 
 %                    (i.e step),  in terms of gravity 9.81 m/s^2
 %-------------------------------------------------------------------------%
-options.MinPeakDistance;    %choose value
-options.MinPeakHeight;      %choose value
+options.MinPeakDistance = 0.2;    %choose value
+options.MinPeakHeight = 0.1*G;      %choose value
 %% Run Walking Detection and Step Detection Algorithm
 %choose one of the filenames from the dataset and corresponding subject
 %identifier
-file_index; %choose a value [1, 2, ..., N], where N are the number of files
+file_index = 17; %choose a value [1, 2, ..., N], where N are the number of files
 %get the corresponding filename and subject name from the fileInfo table:
 filename=fileInfo.filename(file_index); subject=fileInfo.subject(file_index);
 

@@ -18,8 +18,7 @@ close all
 %your directory where the data is stored by denoting the pathname variable:
 %e.g.: data_pathname='C:\MATLAB\B18 Lab\DATA\B18_GAIT_data\'
 b18lab_pathname=pwd;
-data_pathname=[b18lab_pathname, filesep, 'DATA\B18_GAIT_data'];
-
+data_pathname='C:\Users\benka\OneDrive - Nexus365\B-course Content\B18 Biological Modelling\Wearables Lab\B18-Wearables-Laboratory\DATA\B18_GAIT_data\';
 %set the device location; in this example we are only interested in
 %smartphone accelerometry that recorded when the phone was in the front
 %trousers pocket.
@@ -48,9 +47,9 @@ options.plot_data=0; %leave off
 %      walking, in seconds [s];(default, options.ssd_threshold=5; [s]).
 %-------------------------------------------------------------------------%
 G=9.81; %gravity 9.81 m/s^2
-options.acc_threshold;   %choose a value
-options.ssd_threshold;   %choose a value;
-options.time_threshold;  %choose a value %[s]
+options.acc_threshold = 0.1*G;   %choose a value
+options.ssd_threshold = 0.23*G;   %choose a value;
+options.time_threshold = 5;  %choose a value %[s]
 %% Step Detection Parameters:
 %-------------------------------------------------------------------------%
 % - 'MinPeakDistance': the minimum distance between each detected peak 
@@ -58,8 +57,8 @@ options.time_threshold;  %choose a value %[s]
 % - 'MinPeakHeight': the minimum height of a detected detected peak 
 %                    (i.e step),  in terms of gravity 9.81 m/s^2
 %-------------------------------------------------------------------------%
-options.MinPeakDistance; %choose a value
-options.MinPeakHeight;   %choose a value
+options.MinPeakDistance = 0.2; %choose a value
+options.MinPeakHeight = 0.09*G;   %choose a value
 %% Run Walking Detection and Step Detection algorithm for all subjects
 % In this section you will run the step detection algorithm for all
 % subjects with front trouser pocket recordings. We will gather all step
@@ -84,7 +83,7 @@ for s=1:num_subjects
     filename=fileInfo.filename(s);
     subject=fileInfo.subject(s);
     [steps_counted(s), num_steps_detected(s), cadence(s)]=...
-        run_smartphone_gait(pathname, filename, subject, device_location, options);       
+        run_smartphone_gait(data_pathname, filename, subject, device_location, options);       
 end
 %% Step Detection Analysis
 % In this section you will perform some simple step detection analysis. We

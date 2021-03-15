@@ -11,9 +11,15 @@ nexttile
 plot(eyesopen(1:cutoff))
 xlabel('sample #')
 ylabel('amplitude (\muV)')
+title('Eyes open')
+xlim([0 512])
+
 nexttile
 plot(eyesclosed(1:512))
-
+xlabel('sample #')
+ylabel('amplitude (\muV)')
+title('Eyes closed')
+xlim([0 512])
 
 %% Processing
 eyesopen_detrend = standardise(eyesopen);
@@ -33,6 +39,22 @@ filt_eyesclosed = filter(B, A, eyesclosed_detrend);
 
 filt_eyesopen = filt_eyesopen(1:cutoff);
 filt_eyesclosed = filt_eyesclosed(1:cutoff);
+
+figure(3);
+tiledlayout(1,2)
+nexttile
+plot(filt_eyesopen(1:cutoff))
+xlabel('sample #')
+ylabel('processed amplitude')
+title('Eyes open')
+xlim([0 512])
+nexttile
+plot(filt_eyesclosed(1:512))
+xlabel('sample #')
+ylabel('processed amplitude')
+title('Eyes closed')
+xlim([0 512])
+
 
 %% Spectral analysis
 
